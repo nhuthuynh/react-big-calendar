@@ -84,6 +84,10 @@
   background-color: $today-highlight-bg;
 }
 
+.rbc-disable {
+  background-color: $disable-day-highlight-bg;
+}
+
 @import './toolbar';
 @import './event';
 @import './month';
