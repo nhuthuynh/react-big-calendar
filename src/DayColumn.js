@@ -158,7 +158,7 @@ class DayColumn extends React.Component {
           </div>
         </EventContainer>
 
-        {selecting && (
+        {!disable && selecting && (
           <div className="rbc-slot-selection" style={{ top, height }}>
             <span>{localizer.format(selectDates, 'selectRangeFormat')}</span>
           </div>
@@ -241,7 +241,8 @@ class DayColumn extends React.Component {
     }))
 
     let maybeSelect = box => {
-      let onSelecting = this.props.onSelecting
+      let { onSelecting, disable } = this.props
+      if (disable) return
       let current = this.state || {}
       let state = selectionState(box)
       let { startDate: start, endDate: end } = state
