@@ -113,6 +113,7 @@ class DayColumn extends React.Component {
       localizer,
       getters: { dayProp, ...getters },
       components: { eventContainerWrapper: EventContainer, ...components },
+      disable,
     } = this.props
 
     let { slotMetrics } = this
@@ -131,7 +132,8 @@ class DayColumn extends React.Component {
           'rbc-time-column',
           isNow && 'rbc-now',
           isNow && 'rbc-today', // WHY
-          selecting && 'rbc-slot-selecting'
+          selecting && 'rbc-slot-selecting',
+          disable && 'rbc-disable'
         )}
       >
         {slotMetrics.groups.map((grp, idx) => (
@@ -396,6 +398,7 @@ DayColumn.propTypes = {
   className: PropTypes.string,
   dragThroughEvents: PropTypes.bool,
   resource: PropTypes.any,
+  disable: PropTypes.bool,
 }
 
 DayColumn.defaultProps = {
