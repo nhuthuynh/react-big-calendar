@@ -721,6 +721,18 @@ class Calendar extends React.Component {
       noEventsInRange: PropTypes.node,
       showMore: PropTypes.func,
     }),
+
+    /**
+     * Disabling view no specific days.
+     *
+     * ```jsx
+     * let disabledDays = [ new Date(), new Date() ]
+     *
+     * <Calendar disabledDays={disabledDays} />
+     * ```
+     *
+     */
+    disabledDays: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
   }
 
   static defaultProps = {
@@ -862,6 +874,7 @@ class Calendar extends React.Component {
       formats: _1,
       messages: _2,
       culture: _3,
+      disabledDays,
       ...props
     } = this.props
 
@@ -914,6 +927,7 @@ class Calendar extends React.Component {
           onDoubleClickEvent={this.handleDoubleClickEvent}
           onSelectSlot={this.handleSelectSlot}
           onShowMore={onShowMore}
+          disabledDays={disabledDays}
         />
       </div>
     )
