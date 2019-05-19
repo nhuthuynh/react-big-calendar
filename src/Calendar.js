@@ -721,6 +721,38 @@ class Calendar extends React.Component {
       noEventsInRange: PropTypes.node,
       showMore: PropTypes.func,
     }),
+
+    /**
+     * Disabling view no specific days.
+     *
+     * ```jsx
+     * let disabledDays = [ new Date(), new Date() ]
+     *
+     * <Calendar disabledDays={disabledDays} />
+     * ```
+     *
+     */
+    disabledDays: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
+
+    /**
+     * Business hours will allow to select only some interval in Day and Week views.
+     *
+     * ```jsx
+     * let businessHours = [{
+     *    dow: [0, 1, 2, 3, 4, 5, 6], // Sunday, Monday, Tuesday, Wednesday...
+     *    start: "08:30", // 8:30am
+     *    end: "12:30" // 12:30pm
+     *  }, {
+     *    dow: [0, 1, 2], // Sunday, Monday, Tuesday, Wednesday...
+     *    start: "14:30", // 2:30pm
+     *    end: "20:00" // 8pm
+     *  }]
+     *
+     * <Calendar businessHours={businessHours} />
+     * ```
+     *
+     */
+    businessHours: PropTypes.arrayOf(PropTypes.object),
   }
 
   static defaultProps = {
@@ -862,6 +894,8 @@ class Calendar extends React.Component {
       formats: _1,
       messages: _2,
       culture: _3,
+      disabledDays,
+      businessHours,
       ...props
     } = this.props
 
@@ -914,6 +948,8 @@ class Calendar extends React.Component {
           onDoubleClickEvent={this.handleDoubleClickEvent}
           onSelectSlot={this.handleSelectSlot}
           onShowMore={onShowMore}
+          disabledDays={disabledDays}
+          businessHours={businessHours}
         />
       </div>
     )

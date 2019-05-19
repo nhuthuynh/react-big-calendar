@@ -102,8 +102,15 @@ export default class TimeGrid extends Component {
     })
   }
 
-  renderEvents(range, events, now) {
-    let { min, max, components, accessors, localizer } = this.props
+  renderEvents(range, events, now, disabledDays) {
+    let {
+      min,
+      max,
+      components,
+      accessors,
+      localizer,
+      businessHours,
+    } = this.props
 
     const resources = this.memoizedResources(this.props.resources, accessors)
     const groupedEvents = resources.groupEvents(events)
@@ -118,6 +125,11 @@ export default class TimeGrid extends Component {
             'day'
           )
         )
+        let disables =
+          disabledDays &&
+          disabledDays.filter(
+            disabledDate => dates.diff(disabledDate, date, 'day') === 0
+          )
 
         return (
           <DayColumn
@@ -131,6 +143,8 @@ export default class TimeGrid extends Component {
             key={i + '-' + jj}
             date={date}
             events={daysEvents}
+            disable={disables && disables.length > 0}
+            businessHours={businessHours}
           />
         )
       })
@@ -153,6 +167,7 @@ export default class TimeGrid extends Component {
       max,
       showMultiDayTimes,
       longPressThreshold,
+      disabledDays,
     } = this.props
 
     width = width || this.state.gutterWidth
@@ -226,7 +241,7 @@ export default class TimeGrid extends Component {
             components={components}
             className="rbc-time-gutter"
           />
-          {this.renderEvents(range, rangeEvents, getNow())}
+          {this.renderEvents(range, rangeEvents, getNow(), disabledDays)}
         </div>
       </div>
     )
@@ -323,6 +338,8 @@ TimeGrid.propTypes = {
   onDoubleClickEvent: PropTypes.func,
   onDrillDown: PropTypes.func,
   getDrilldownView: PropTypes.func.isRequired,
+  disabledDays: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
+  businessHours: PropTypes.arrayOf(PropTypes.object),
 }
 
 TimeGrid.defaultProps = {
