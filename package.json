@@ -1,9 +1,12 @@
 {
-  "name": "react-big-calendar",
+  "name": "@nhut-huynh/react-calendar",
   "version": "0.20.4",
-  "description": "Calendar! with events",
-  "author": "Jason Quense <monastic.panic@gmail.com>",
-  "repository": "intljusticemission/react-big-calendar",
+  "description": "Update Calendar! with events Fork Original code from intljusticemission/react-big-calendar",
+  "author": "Minh Nhut Huynh <ne7ven@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhuthuynh/react-big-calendar.git"
+  },
   "license": "MIT",
   "main": "lib/index.js",
   "module": "dist/react-big-calendar.esm.js",
@@ -136,5 +139,14 @@
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
+  },
+  "bugs": {
+    "url": "https://github.com/nhuthuynh/react-big-calendar/issues"
+  },
+  "homepage": "https://github.com/nhuthuynh/react-big-calendar#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
   }
 }
