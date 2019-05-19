@@ -8,7 +8,7 @@ import dates from './utils/dates'
 import * as TimeSlotUtils from './utils/TimeSlots'
 import { isSelected } from './utils/selection'
 
-import { notify } from './utils/helpers'
+import { notify, dateIsInBusinessHours } from './utils/helpers'
 import * as DayEventLayout from './utils/DayEventLayout'
 import TimeSlotGroup from './TimeSlotGroup'
 import TimeGridEvent from './TimeGridEvent'
@@ -114,6 +114,7 @@ class DayColumn extends React.Component {
       getters: { dayProp, ...getters },
       components: { eventContainerWrapper: EventContainer, ...components },
       disable,
+      businessHours,
     } = this.props
 
     let { slotMetrics } = this
@@ -143,6 +144,7 @@ class DayColumn extends React.Component {
             resource={resource}
             getters={getters}
             components={components}
+            businessHours={businessHours}
           />
         ))}
         <EventContainer
@@ -241,11 +243,23 @@ class DayColumn extends React.Component {
     }))
 
     let maybeSelect = box => {
-      let { onSelecting, disable } = this.props
-      if (disable) return
+      let { onSelecting, disable, businessHours } = this.props
+
       let current = this.state || {}
       let state = selectionState(box)
       let { startDate: start, endDate: end } = state
+
+      // return if the date is in disable days
+      if (disable) return
+      // Return if there are business hours and the start date is not included
+      if (
+        businessHours &&
+        businessHours.length > 0 &&
+        (!dateIsInBusinessHours(state.startDate, businessHours, true) ||
+          !dateIsInBusinessHours(state.endDate, businessHours, true))
+      ) {
+        return
+      }
 
       if (onSelecting) {
         if (
@@ -400,6 +414,7 @@ DayColumn.propTypes = {
   dragThroughEvents: PropTypes.bool,
   resource: PropTypes.any,
   disable: PropTypes.bool,
+  businessHours: PropTypes.arrayOf(PropTypes.object),
 }
 
 DayColumn.defaultProps = {

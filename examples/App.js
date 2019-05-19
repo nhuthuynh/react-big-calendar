@@ -29,6 +29,7 @@ import DndOutsideSource from './demos/dndOutsideSource'
 import Dropdown from 'react-bootstrap/lib/Dropdown'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
 import DisableDays from './demos/disabledDays'
+import BusinessHours from './demos/businessHours'
 
 const globalizeLocalizer = localizer(globalize)
 
@@ -47,6 +48,7 @@ const EXAMPLES = {
   dnd: 'Addon: Drag and drop',
   dndOutsideSource: 'Addon: Drag and drop (from outside calendar)',
   disabledDays: 'Disable days',
+  businessHours: 'Business hours',
 }
 
 const DEFAULT_EXAMPLE = 'basic'
@@ -84,6 +86,7 @@ class Example extends React.Component {
       dndresource: DndResource,
       dndOutsideSource: DndOutsideSource,
       disabledDays: DisableDays,
+      businessHours: BusinessHours,
     }[selected]
 
     return (

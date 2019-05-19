@@ -103,7 +103,14 @@ export default class TimeGrid extends Component {
   }
 
   renderEvents(range, events, now, disabledDays) {
-    let { min, max, components, accessors, localizer } = this.props
+    let {
+      min,
+      max,
+      components,
+      accessors,
+      localizer,
+      businessHours,
+    } = this.props
 
     const resources = this.memoizedResources(this.props.resources, accessors)
     const groupedEvents = resources.groupEvents(events)
@@ -137,6 +144,7 @@ export default class TimeGrid extends Component {
             date={date}
             events={daysEvents}
             disable={disables && disables.length > 0}
+            businessHours={businessHours}
           />
         )
       })
@@ -331,6 +339,7 @@ TimeGrid.propTypes = {
   onDrillDown: PropTypes.func,
   getDrilldownView: PropTypes.func.isRequired,
   disabledDays: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
+  businessHours: PropTypes.arrayOf(PropTypes.object),
 }
 
 TimeGrid.defaultProps = {
