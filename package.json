@@ -1,5 +1,5 @@
 {
-  "name": "@nhut-huynh/react-calendar",
+  "name": "@nhut-huynh/react-big-calendar",
   "version": "0.20.4",
   "description": "Update Calendar! with events Fork Original code from intljusticemission/react-big-calendar",
   "author": "Minh Nhut Huynh <ne7ven@gmail.com>",
@@ -123,6 +123,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "@nhut-huynh/react-calendar": "git+https://github.com/nhuthuynh/react-big-calendar.git",
     "bootstrap-sass": "^3.4.1",
     "classnames": "^2.2.6",
     "date-arithmetic": "^3.0.0",
@@ -134,6 +135,7 @@
     "prop-types-extra": "^1.1.0",
     "react-overlays": "^1.2.0",
     "uncontrollable": "^6.0.0",
+    "url": "^0.11.0",
     "warning": "^4.0.2",
     "yarn": "^1.16.0"
   },
