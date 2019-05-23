@@ -31,6 +31,6 @@ node_modules
 
 # Webstorm ide files
 .idea
-
+.code-workspace
 # Mac OS X
 .DS_Store
